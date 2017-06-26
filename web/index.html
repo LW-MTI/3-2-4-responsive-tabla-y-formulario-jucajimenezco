@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+    <meta charset="UTF-8">
+    
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+        
+        function getRadioButtonSelectedValue(ctrl)
+{
+    for(i=0;i<ctrl.length;i++)
+        if(ctrl[i].checked) return ctrl[i].value;
+}
+    $(document).ready(function(){
+        /**
+         * Funcion para añadir una nueva columna en la tabla
+         */
+        $("#add").click(function(){
+            // Obtenemos el numero de filas (td) que tiene la primera columna
+            // (tr) del id "tabla"
+   var reg_1=document.getElementById("nombre"); 
+    var reg_2=document.getElementById("apellido"); 
+   
+    var reg_4=document.getElementById("sel1"); 
+    var reg_3=getRadioButtonSelectedValue(document.form1.sexo);
+     var reg_5=document.getElementById("perfil"); 
+            var tds=$("#tabla tr:first td").length;
+            // Obtenemos el total de columnas (tr) del id "tabla"
+            var trs=$("#tabla tr").length;
+            var nuevaFila="<tr>";
+            nuevaFila+="<td>"+trs+"</td>";
+                // añadimos las columnas
+                nuevaFila+="<td>"+reg_1.value+"</td>";
+            nuevaFila+="<td>"+reg_2.value+"</td>";
+             nuevaFila+="<td>"+reg_3+"</td>";
+            nuevaFila+="<td>"+reg_4.value+"</td>";
+            nuevaFila+="<td>"+reg_5.value+"</td>";
+           
+           
+            // Añadimos una columna con el numero total de columnas.
+            // Añadimos uno al total, ya que cuando cargamos los valores para la
+            // columna, todavia no esta añadida
+              nuevaFila+="<td>"+(trs);
+            
+            
+            nuevaFila+="</tr>";
+            $("#tabla").append(nuevaFila);
+        });
+ 
+        /**
+         * Funcion para eliminar la ultima columna de la tabla.
+         * Si unicamente queda una columna, esta no sera eliminada
+         */
+        $("#del").click(function(){
+            // Obtenemos el total de columnas (tr) del id "tabla"
+            var trs=$("#tabla tr").length;
+            if(trs>1)
+            {
+                // Eliminamos la ultima columna
+                $("#tabla tr:last").remove();
+            }
+        });
+    });
+    </script>
+ 
+    <style>
+    #add, #del  {cursor:pointer;text-decoration:underline;color:#00f;}
+    </style>
+</head>
+ 
+<body>
+    <h1> FORMULARIO...(JCJC)</h1>
+        
+      <form name="form1" class="form-horizontal">
+          
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="nombre">Nombre</label>
+  <div class="col-sm-10">
+      <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+  </div>
+  
+  </div>
+  <div class="form-group">
+    <label for="inputApellido" class="control-label col-sm-2">Apellido</label>
+   <div class="col-sm-10">
+      <input type="text" class="form-control" id="apellido" placeholder="Paterno">
+      </div>
+    
+    
+  </div> 
+  <div class="form-group">
+      <label for="inputSexo" class="col-sm-2 control-label">Sexo</label>
+    
+      <div class="col-sm-2">
+            <div class="radio">
+            <label>
+          <input type="radio" value="femenino" name="sexo"> femenino
+        </label>
+            </div>
+        </div>
+      </div>
+ 
+         <div class="form-group">  
+     <label for="inputSexo" class="col-sm-2 control-label"></label>
+     <div class="col-sm-2">
+          <div class="radio">
+        <label>
+          <input type="radio" value="masculino" name="sexo"> masculino
+        </label>
+    
+    </div>
+  </div>
+           </div>
+    <div class="form-group">
+              
+  <label for="sel1" class="col-sm-2 control-label">Nivel escolar:</label>
+   <div class="col-sm-2">
+  <select class="form-control" id="sel1">
+    <option>Superior1</option>
+    <option>Bachillerato</option>
+    <option>Secundaria</option>
+    <option>Primaria</option>
+  </select>
+</div>
+</div>      
+          
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+ <div class="form-group">
+  <label for="comment" class="col-sm-2 control-label">Perfil:</label>
+  <div class="col-sm-10">
+  <textarea class="form-control " rows="5" id="perfil"></textarea>
+  </div>
+  </div>  
+          
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <button type="button" class="btn btn-success" id="add" onclick="add()">Enviar</button>
+        <button type="button" class="btn btn-danger" id="del">Cancelar</button>
+     
+    </div>
+  </div>
+</form>
+
+<p>
+    
+        <div class="table-responsive">
+  
+<table id="tabla" border=1 class="table" >
+     <thead>
+        <tr>
+            <td>ID</td>
+            <td>Nombre</td>
+            <td>Apellido</td>
+            <td>Sexo</td>
+            <td>Escolaridad</td>
+            <td>Perfil</td>
+            
+            <!-- podemos añadir tantas columnas como deseemos -->
+            <!--<td>tercera columna</td>-->
+        </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+    </div>
+</body>
+</html>
